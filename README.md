@@ -17,7 +17,7 @@
   - 使用 [`GitHub Actions`][^3] 自动记录 [**跑步**](https://github.com/EscapeLife/2022/issues/3) 时间
 
 - **陶冶情操**
-  - 记录 [HowToCook][^4] 自己在家 [**做饭**](https://github.com/EscapeLife/2022/dishes/README.md) 的日常
+  - 记录 [HowToCook][^4] 自己在家 [**做饭**](https://github.com/EscapeLife/2022/blob/master/dishes/README.md) 的日常
 
 ---
 
