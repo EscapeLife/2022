@@ -39,6 +39,7 @@ $ curl \
 
 > **记录完成该项目的主要参考内容及文章**
 
+- [yihong0618/2022](https://github.com/yihong0618/2022)
 - [Github Actions Get an Artifact](https://docs.github.com/en/rest/reference/actions#get-an-artifact)
 - [Github Actions Create a Workflow Dispatch Event](https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event)
 
