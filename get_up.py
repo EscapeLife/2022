@@ -7,9 +7,7 @@ from github import Github
 
 # 14 for test 12 real get up
 GET_UP_ISSUE_NUMBER = 1
-GET_UP_MESSAGE_TEMPLATE = (
-    "今天的起床时间是--{get_up_time}.\r\n\r\n 起床啦，喝杯咖啡，背个单词，去跑步。\r\n\r\n 今天的一句诗:\r\n {sentence}"
-)
+GET_UP_MESSAGE_TEMPLATE = ("今天的起床时间是--{get_up_time}.\r\n\r\n 起床啦，喝杯咖啡，背个单词，去跑步。\r\n\r\n 今天的一句诗:\r\n {sentence}")
 SENTENCE_API = "https://v1.jinrishici.com/all"
 DEFAULT_SENTENCE = "赏花归去马如飞\r\n去马如飞酒力微\r\n酒力微醒时已暮\r\n醒时已暮赏花归\r\n"
 TIMEZONE = "Asia/Shanghai"
@@ -36,8 +34,7 @@ def get_today_get_up_status(issue):
         return False
     latest_comment = comments[-1]
     now = pendulum.now(TIMEZONE)
-    latest_day = pendulum.instance(
-        latest_comment.created_at).in_timezone("Asia/Shanghai")
+    latest_day = pendulum.instance(latest_comment.created_at).in_timezone("Asia/Shanghai")
     is_today = (latest_day.day == now.day) and (latest_day.month == now.month)
     return is_today
 
@@ -48,8 +45,7 @@ def make_get_up_message():
     # 3 - 7 means early for me
     is_get_up_early = 6 <= now.hour <= 18
     get_up_time = now.to_datetime_string()
-    body = GET_UP_MESSAGE_TEMPLATE.format(
-        get_up_time=get_up_time, sentence=sentence)
+    body = GET_UP_MESSAGE_TEMPLATE.format(get_up_time=get_up_time, sentence=sentence)
     return body, is_get_up_early
 
 
@@ -71,9 +67,7 @@ def main(github_token, repo_name, weather_message, tele_token, tele_chat_id):
         # send to telegram
         if tele_token and tele_chat_id:
             requests.post(
-                url="https://api.telegram.org/bot{0}/{1}".format(
-                    tele_token, "sendMessage"
-                ),
+                url="https://api.telegram.org/bot{0}/{1}".format(tele_token, "sendMessage"),
                 data={
                     "chat_id": tele_chat_id,
                     "text": body,
@@ -87,13 +81,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("github_token", help="github_token")
     parser.add_argument("repo_name", help="repo_name")
-    parser.add_argument(
-        "--weather_message", help="weather_message", nargs="?", default="", const=""
-    )
-    parser.add_argument("--tele_token", help="tele_token",
-                        nargs="?", default="", const="")
-    parser.add_argument("--tele_chat_id", help="tele_chat_id",
-                        nargs="?", default="", const="")
+    parser.add_argument("--weather_message", help="weather_message", nargs="?", default="", const="")
+    parser.add_argument("--tele_token", help="tele_token", nargs="?", default="", const="")
+    parser.add_argument("--tele_chat_id", help="tele_chat_id", nargs="?", default="", const="")
     options = parser.parse_args()
     main(
         options.github_token,
