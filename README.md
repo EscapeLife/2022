@@ -35,6 +35,57 @@ $ curl \
   -d '{"ref":"master", "inputs": {"message": "22°C，有霾"}}'
 ```
 
+## 通知配置
+
+> **如何设置使用 telegram bot 发送通知呢？`@BotFather`**
+
+- **[1] 创建并获取 token**
+
+```bash
+# 添加机器人(点击聊天)
+# https://core.telegram.org/bots
+https://t.me/BotFather
+
+# 创建并设置机器人名称(字符串必须以bot结尾)
+/newbot
+TestBot
+
+# 设置成功会返回token和url地址
+https://t.me/TestBot
+12345567890:AAAbbbCCCdddEEEfffGGGhhh123456
+
+# 显示名称设置(不是唯一识别码)
+/setname
+
+# 其他必要的命令(描述/头像/帮助)
+/setdescription
+/setuserpic
+/help
+```
+
+- **[2] 获取 chatId 的值**
+
+```bash
+# 浏览器访问
+https://api.telegram.org/bot{token}/getUpdates
+
+# 随便给bot发送一句话
+Hello World
+
+# 再次访问上述请求(result[0].message.chat.id)
+https://api.telegram.org/bot{token}/getUpdates
+123456789
+```
+
+- **[3] 测试信息完整性**
+
+```bash
+# 不出意外的话bot会发送消息(已经成功了)
+curl -s -X POST \
+    https://api.telegram.org/bot{token}/sendMessage \
+	-d chat_id={chatId} -d text="Hello World"
+```
+
 ## 索引链接
 
 > **记录完成该项目的主要参考内容及文章**
