@@ -1,12 +1,12 @@
 import argparse
-import requests
+
 import pendulum
-
-
+import requests
 from github import Github
 
+# send to repo's issue
 GET_UP_ISSUE_NUMBER = 1
-GET_UP_MESSAGE_TEMPLATE = ("今天的起床时间是--{get_up_time}.\r\n\r\n 起床啦，喝杯咖啡，背个单词，去跑步。\r\n\r\n 今天的一句诗:\r\n {sentence}")
+GET_UP_MESSAGE_TEMPLATE = ("今天的起床时间是--{get_up_time}.\r\n\r\n 起床啦，喝杯喝水，背个单词，看看书。\r\n\r\n 今天的一句诗:\r\n {sentence}")
 SENTENCE_API = "https://v1.jinrishici.com/all"
 DEFAULT_SENTENCE = "赏花归去马如飞\r\n去马如飞酒力微\r\n酒力微醒时已暮\r\n醒时已暮赏花归\r\n"
 TIMEZONE = "Asia/Shanghai"
