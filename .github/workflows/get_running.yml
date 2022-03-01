@@ -1,0 +1,39 @@
+name: GET RUNNING
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'weather message'
+        required: false
+
+jobs:
+  sync:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set Running Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Configure Pip Cache
+        uses: actions/cache@v1
+        id: pip-cache
+        with:
+          path: venv
+          key: pip-1-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            pip-
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+        if: steps.pip-cache.outputs.cache-hit != 'true'
+      - name: Get Running Task
+        run: |
+          source venv/bin/activate
+          python scripts/get_running.py ${{ secrets.ESCAPE_LIFE_KEY }} ${{ github.repository }} --weather_message ": ${{ github.event.inputs.message }}" --tele_token ${{ secrets.TELE_TOKEN }} --tele_chat_id ${{ secrets.TELE_CHAT_ID }}
