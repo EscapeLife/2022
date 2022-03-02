@@ -48,6 +48,17 @@ def make_get_sleep_message():
     return body, is_get_sleep_early
 
 
+def send_msg_to_telegram(tele_token, tele_chat_id, msg):
+    if tele_token and tele_chat_id and msg:
+        requests.post(
+            url="https://api.telegram.org/bot{0}/{1}".format(tele_token, "sendMessage"),
+            data={
+                "chat_id": tele_chat_id,
+                "text": msg,
+            },
+        )
+
+
 def main(github_token, repo_name, weather_message, tele_token, tele_chat_id):
     u = login(github_token)
     repo = u.get_repo(repo_name)
@@ -63,17 +74,10 @@ def main(github_token, repo_name, weather_message, tele_token, tele_chat_id):
         body = weather_message + early_message
     if is_get_sleep_early:
         issue.create_comment(body)
-        # send to telegram
-        if tele_token and tele_chat_id:
-            requests.post(
-                url="https://api.telegram.org/bot{0}/{1}".format(tele_token, "sendMessage"),
-                data={
-                    "chat_id": tele_chat_id,
-                    "text": body,
-                },
-            )
+        send_msg_to_telegram(tele_token, tele_chat_id, body)
     else:
-        print("You go to bed too late")
+        body = "You go to bed too late."
+        send_msg_to_telegram(tele_token, tele_chat_id, body)
 
 
 if __name__ == "__main__":
