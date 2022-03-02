@@ -24,22 +24,22 @@
 ```bash
 # 获取项目action_id的值(用于获取workflow_id的值)
 $ curl -H "Authorization: token token_id" \
-  https://api.github.com/repos/{owner}/{repo}/actions/workflows
+    https://api.github.com/repos/{owner}/{repo}/actions/workflows
 
 # 触发action自动更新机制
 $ curl \
-  -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: token token_id" \
-  https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches \
-  -d '{"ref":"master", "inputs": {"message": "22°C，有霾"}}'
+    -X POST \
+    -H "Accept: application/vnd.github.v3+json" \
+    -H "Authorization: token token_id" \
+    https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches \
+    -d '{"ref":"master", "inputs": {"message": "22°C，有霾"}}'
 ```
 
 ## 通知配置
 
-> **如何设置使用 telegram bot 发送通知呢？`@BotFather`**
+> **如何设置使用 telegram bot 发送通知呢？- [@BotFather](https://t.me/BotFather)**
 
-- **[1] 创建并获取 token**
+- **[1] 创建并获取 token 的值**
 
 ```bash
 # 添加机器人(点击聊天)
@@ -81,9 +81,9 @@ https://api.telegram.org/bot{token}/getUpdates
 
 ```bash
 # 不出意外的话bot会发送消息(已经成功了)
-curl -s -X POST \
+$ curl -s -X POST \
     https://api.telegram.org/bot{token}/sendMessage \
-	-d chat_id={chatId} -d text="Hello World"
+    -d chat_id={chatId} -d text="Hello World"
 ```
 
 ## 索引链接
