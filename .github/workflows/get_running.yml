@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       message:
-        description: 'weather message'
+        description: "weather message"
         required: false
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Set Running Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.6
+          python-version: 3.11
       - name: Configure Pip Cache
         uses: actions/cache@v1
         id: pip-cache
